@@ -1,9 +1,10 @@
 import z from 'zod';
 
 const userSquema = z.object({
-    name: z.string().min(2).max(30),
+    username: z.string().min(2).max(30),
     email: z.string().email(),
-    password: z.string().min(60)
+    password: z.string().min(5),
+    is_admin : z.boolean().optional()
 });
 
 export function validateUser(user) {
