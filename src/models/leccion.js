@@ -5,8 +5,7 @@ const connection = await createConnection();
 
 export class leccionModel{
     static async getByCurso({ curso_id }) {
-        //TODO order by id
-        const lecciones = await connection.query('SELECT * FROM leccion WHERE curso_id = $1 ORDER BY id', [curso_id]);
+        const lecciones = await connection.query('SELECT * FROM leccion WHERE curso_id = $1', [curso_id]);
         return lecciones.rows;
     }
 

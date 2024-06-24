@@ -2,7 +2,7 @@ import z from 'zod';
 
 const leccionSquema = z.object({
     titulo: z.string().min(5).max(100),
-    descripcion: z.string().min(10).max(255),
+    contenido: z.string().min(10).max(255),
     curso_id: z.number().int().positive()
 });
 

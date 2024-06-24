@@ -15,8 +15,15 @@ export class cursoModel{
     }
 
     static async getByName({ titulo }) {
-        const curso = await connection.query('SELECT * FROM curso WHERE titulo LIKE $1', [`%${titulo}%`]);
+        //convert titulo to lowercase
+        titulo = titulo.toLowerCase();
+        //search for the title in the database in lower case with like %%
+        const curso = await connection.query('SELECT * FROM curso WHERE lower(titulo) like $1', ['%' + titulo + '%']);
         return curso.rows;
+    }
+
+    static async getByUsuario({ usuario_id }) {
+        
     }
 
     static async create({ curso }) {

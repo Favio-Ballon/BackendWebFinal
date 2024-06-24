@@ -4,6 +4,8 @@ import { corsMiddleware } from './middlewares/cors.js';
 import cursoRouter from './routes/curso.routes.js';
 import categoriaRouter from './routes/categoria.routes.js'
 import leccionRouter from './routes/leccion.routes.js';
+import misCursosRouter from './routes/misCursos.routes.js';
+import vistosRouter from './routes/visto.routes.js';
 
 const app = express();
 app.use(json());
@@ -15,6 +17,8 @@ app.use('/usuarios', userRoutes);
 app.use('/cursos', cursoRouter);
 app.use('/categorias', categoriaRouter);
 app.use('/lecciones', leccionRouter);
+app.use('/miscursos', misCursosRouter);
+app.use('/vistos', vistosRouter);
 
 
 

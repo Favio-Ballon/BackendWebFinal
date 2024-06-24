@@ -3,7 +3,8 @@ import { validateLeccion } from "../schemas/leccion.js";
 
 export class LeccionController{
     static async getByCurso(req, res) {
-        const { curso_id } = req.params;
+        const { curso_id } = req.params
+        console.log(req.params);
         const lecciones = await leccionModel.getByCurso({ curso_id });
         res.json(lecciones);
     }
