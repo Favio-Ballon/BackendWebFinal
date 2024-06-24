@@ -26,6 +26,7 @@ export class CursoController {
     }
 
     static async create(req, res) {
+        console.log(req.body)
         const result = validateCurso(req.body);
         if (result.error) {
             return res.status(422).json({ error: JSON.parse(result.error.message) });
