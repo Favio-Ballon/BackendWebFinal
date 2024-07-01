@@ -1,9 +1,9 @@
-import createConnection  from '../connection.js';
+import createConnection from '../connection.js';
 
 
 const connection = await createConnection();
 
-export class cursoModel{
+export class cursoModel {
     static async getAll() {
         const cursos = await connection.query('SELECT * FROM curso');
         return cursos.rows;
@@ -22,11 +22,9 @@ export class cursoModel{
         return curso.rows;
     }
 
-    static async getByUsuario({ usuario_id }) {
-        
-    }
 
     static async create({ curso }) {
+        console.log("----------------------", curso)
         const { titulo, descripcion, autor, admin_id, imagen_path } = curso;
         await connection.query('INSERT INTO curso (titulo, descripcion, autor, admin_id, imagen_path) VALUES ($1, $2, $3, $4, $5)', [titulo, descripcion, autor, admin_id, imagen_path]);
     }
@@ -36,7 +34,11 @@ export class cursoModel{
     }
 
     static async update({ id, curso }) {
-        const { titulo, descripcion, autor, admin_id, imagen_path } = curso;
-        await connection.query('UPDATE curso SET titulo = $1, descripcion = $2, autor = $3, admin_id = $4, imagen_path= $5 WHERE id = $6', [titulo, descripcion, autor, admin_id, imagen_path, id]);
+        const { titulo, descripcion, autor, imagen_path } = curso;
+        if (!imagen_path) {
+            await connection.query('UPDATE curso SET titulo = $1, descripcion = $2, autor = $3 WHERE id = $4', [titulo, descripcion, autor, id]);
+        } else {
+            await connection.query('UPDATE curso SET titulo = $1, descripcion = $2, autor = $3, imagen_path= $4 WHERE id = $5', [titulo, descripcion, autor, imagen_path, id]);
+        }
     }
 }

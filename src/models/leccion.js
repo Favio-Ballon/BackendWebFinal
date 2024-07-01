@@ -10,8 +10,8 @@ export class leccionModel{
     }
 
     static async create({ leccion }) {
-        const {curso_id, titulo, contenido} = leccion;
-        await connection.query('INSERT INTO leccion (curso_id, titulo, contenido) VALUES ($1, $2, $3)', [curso_id, titulo, contenido]);
+        const {curso_id, titulo, contenido, tipo} = leccion;
+        await connection.query('INSERT INTO leccion (curso_id, titulo, contenido, tipo, posicion) VALUES ($1, $2, $3, $4, $5)', [curso_id, titulo, contenido, tipo, curso_id]);
     }
 
     static async delete({ id }) {
@@ -19,8 +19,8 @@ export class leccionModel{
     }
 
     static async update({ id, leccion }) {
-        const {curso_id, titulo, contenido} = leccion;
-        await connection.query('UPDATE leccion SET curso_id = $1, titulo = $2, contenido = $3 WHERE id = $4', [curso_id, titulo, contenido, id]);
+        const {curso_id, titulo , contenido, tipo} = leccion;
+        await connection.query('UPDATE leccion SET curso_id = $1, titulo = $2, contenido = $3, tipo = $4 WHERE id = $5', [curso_id, titulo, contenido, tipo, id]);
     }
 
     static async getById({ id }) {

@@ -46,16 +46,15 @@ app.use('/vistos', vistosRouter);
 app.use('/src/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.post
-('/upload', upload.single('image'), (req, res) => {
+    ('/upload', upload.single('image'), (req, res) => {
 
-if (!req.file) {
-res.status(400).json("No file uploaded.");
-return;
-}
+        if (!req.file) {
+            res.status(400).json("No file uploaded.");
+            return;
+        }
 
-// You can perform additional operations with the uploaded image here.
-res.status(200).json(req.file.path);
-});
+        res.status(200).json(req.file.filename);
+    });
 
 
 app.get('/', (req, res) => {

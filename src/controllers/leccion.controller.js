@@ -16,6 +16,7 @@ export class LeccionController{
     }
 
     static async create(req, res) {
+        console.log("Leccion: ", req.body)
         const result = validateLeccion(req.body);
         if (result.error) {
             return res.status(422).json({ error: JSON.parse(result.error.message) });

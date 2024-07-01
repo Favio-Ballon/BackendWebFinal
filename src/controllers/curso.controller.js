@@ -1,5 +1,5 @@
 import { cursoModel } from "../models/curso.js";
-import { validateCurso } from "../schemas/curso.js";
+import { validateCurso, validatePartialCurso } from "../schemas/curso.js";
 
 export class CursoController {
     static async getAll(req, res) {
@@ -26,8 +26,8 @@ export class CursoController {
     }
 
     static async create(req, res) {
-        console.log(req.body)
         const result = validateCurso(req.body);
+        console.log(result)
         if (result.error) {
             return res.status(422).json({ error: JSON.parse(result.error.message) });
         }
@@ -43,7 +43,7 @@ export class CursoController {
 
     static async update (req, res) {
         const { id } = req.params;
-        const result = validateCurso(req.body);
+        const result = validatePartialCurso(req.body);
         if (result.error) {
             res.status(422).json({ error: JSON.parse(result.error.message) });
             return;
