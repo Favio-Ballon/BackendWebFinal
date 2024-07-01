@@ -1,5 +1,5 @@
 import { leccionModel } from "../models/leccion.js";
-import { validateLeccion } from "../schemas/leccion.js";
+import { validateLeccion, validatePartialLeccion } from "../schemas/leccion.js";
 
 export class LeccionController{
     static async getByCurso(req, res) {
@@ -16,7 +16,7 @@ export class LeccionController{
     }
 
     static async create(req, res) {
-        console.log("Leccion: ", req.body)
+        console.log("Leccion: ", req.body);
         const result = validateLeccion(req.body);
         if (result.error) {
             return res.status(422).json({ error: JSON.parse(result.error.message) });
@@ -27,7 +27,8 @@ export class LeccionController{
 
     static async update(req, res) {
         const { id } = req.params;
-        const result = validateLeccion(req.body);
+        console.log(req.body);
+        const result = validatePartialLeccion(req.body);
         if (result.error) {
             res.status(422).json({ error: JSON.parse(result.error.message) });
             return;

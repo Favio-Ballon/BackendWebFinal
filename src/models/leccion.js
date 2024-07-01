@@ -5,13 +5,13 @@ const connection = await createConnection();
 
 export class leccionModel{
     static async getByCurso({ curso_id }) {
-        const lecciones = await connection.query('SELECT * FROM leccion WHERE curso_id = $1', [curso_id]);
+        const lecciones = await connection.query('SELECT * FROM leccion WHERE curso_id = $1 ORDER BY posicion', [curso_id]);
         return lecciones.rows;
     }
 
     static async create({ leccion }) {
         const {curso_id, titulo, contenido, tipo} = leccion;
-        await connection.query('INSERT INTO leccion (curso_id, titulo, contenido, tipo, posicion) VALUES ($1, $2, $3, $4, $5)', [curso_id, titulo, contenido, tipo, curso_id]);
+        await connection.query('INSERT INTO leccion (curso_id, titulo, contenido, tipo) VALUES ($1, $2, $3, $4)', [curso_id, titulo, contenido, tipo]);
     }
 
     static async delete({ id }) {
@@ -19,8 +19,8 @@ export class leccionModel{
     }
 
     static async update({ id, leccion }) {
-        const {curso_id, titulo , contenido, tipo} = leccion;
-        await connection.query('UPDATE leccion SET curso_id = $1, titulo = $2, contenido = $3, tipo = $4 WHERE id = $5', [curso_id, titulo, contenido, tipo, id]);
+        const {titulo , contenido, tipo} = leccion;
+        await connection.query('UPDATE leccion SET titulo = $1, contenido = $2, tipo = $3 WHERE id = $4', [titulo, contenido, tipo, id]);
     }
 
     static async getById({ id }) {
