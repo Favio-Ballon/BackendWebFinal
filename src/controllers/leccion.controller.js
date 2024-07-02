@@ -42,4 +42,16 @@ export class LeccionController{
         await leccionModel.delete({ id });
         res.json({ message: 'Leccion eliminada' });
     }
+
+    static async moveDown(req, res){
+        const { id } = req.params;
+        await leccionModel.moveDown({ id });
+        res.json({ message: 'Leccion movida' });
+    }
+
+    static async moveUp(req, res){
+        const { id } = req.params;
+        await leccionModel.moveUp({ id });
+        res.json({ message: 'Leccion movida' });
+    }
 }

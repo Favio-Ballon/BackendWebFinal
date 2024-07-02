@@ -27,4 +27,12 @@ export class leccionModel{
         const leccion = await connection.query('SELECT * FROM leccion WHERE id = $1', [id]);
         return leccion.rows;
     }
+
+    static async moveDown({id}){
+        await connection.query('SELECT swap_with_next_lesson($1)', [id])
+    }
+
+    static async moveUp({id}){
+        await connection.query('SELECT swap_with_past_lesson($1)', [id])
+    }
 }
