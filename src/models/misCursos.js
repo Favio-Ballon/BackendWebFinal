@@ -4,7 +4,7 @@ const connection = await createConnection();
 
 export class misCursosModel{
     static async getByUsuario({ usuario_id }) {
-        const cursos = await connection.query('SELECT * FROM curso WHERE id IN (SELECT curso_id FROM mis_cursos WHERE usuario_id = $1)', [usuario_id]);
+        const cursos = await connection.query('SELECT * FROM curso WHERE id IN (SELECT curso_id FROM mis_cursos WHERE usuario_id = $1) ORDER BY titulo', [usuario_id]);
         return cursos.rows;
     }
 

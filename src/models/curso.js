@@ -5,7 +5,7 @@ const connection = await createConnection();
 
 export class cursoModel {
     static async getAll() {
-        const cursos = await connection.query('SELECT * FROM curso');
+        const cursos = await connection.query('SELECT * FROM curso ORDER BY titulo');
         return cursos.rows;
     }
 
@@ -18,7 +18,7 @@ export class cursoModel {
         //convert titulo to lowercase
         titulo = titulo.toLowerCase();
         //search for the title in the database in lower case with like %%
-        const curso = await connection.query('SELECT * FROM curso WHERE lower(titulo) like $1', ['%' + titulo + '%']);
+        const curso = await connection.query('SELECT * FROM curso WHERE lower(titulo) like $1 ORDER BY titulo', ['%' + titulo + '%'] );
         return curso.rows;
     }
 
