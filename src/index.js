@@ -6,6 +6,7 @@ import categoriaRouter from './routes/categoria.routes.js'
 import leccionRouter from './routes/leccion.routes.js';
 import misCursosRouter from './routes/misCursos.routes.js';
 import vistosRouter from './routes/visto.routes.js';
+import cursoHasCategoriaRouter from './routes/cursoHasCategoria.routes.js';
 import multer from 'multer';
 import fs from 'fs';
 import path from 'path';
@@ -42,6 +43,7 @@ app.use('/categorias', categoriaRouter);
 app.use('/lecciones', leccionRouter);
 app.use('/miscursos', misCursosRouter);
 app.use('/vistos', vistosRouter);
+app.use('/cursoHasCategoria', cursoHasCategoriaRouter);
 
 app.use('/src/uploads', express.static(path.join(__dirname, 'uploads')));
 
